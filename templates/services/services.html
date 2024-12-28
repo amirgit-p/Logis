@@ -6,7 +6,7 @@
   <main class="main">
 
     <!-- Page Title -->
-    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/page-title-bg.jpg);">
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url({% static 'assets/img/page-title-bg.jpg' %});">
       <div class="container position-relative">
         <h1>Services</h1>
         <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
@@ -23,7 +23,7 @@
     <section id="featured-services" class="featured-services section">
 
       <div class="container">
-
+        
         <div class="row gy-4">
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
@@ -55,8 +55,10 @@
           </div><!-- End Service Item -->
 
         </div>
+        
 
       </div>
+      
 
     </section><!-- /Featured Services Section -->
 
@@ -69,74 +71,47 @@
         <h2>Our ServiceS</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
-
+      
       <div class="container">
-
+        {% for service in services %}
         <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div  class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-1.jpg" alt="" class="img-fluid">
+              <div  class="card-img" >
+                <img src="{% static 'assets/img/service-1.jpg' %}" alt="" class="img-fluid">
               </div>
-              <h3>Storage</h3>
-              <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam repellendus temporibus itaqueofficiis odit</p>
+              <h3 class="title">
+                <a href={% url 'services:service-details' id=service.id %}>{{service.title}}</a>
+              </h3>
+              {% comment %} <h3><a href={% url 'services:service-details' id=service.id %}>{{service.title}}</h3> {% endcomment %}
+              <p>{{service.desc}}</p>
             </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-2.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Logistics</a></h3>
-              <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt molestiae dolor ipsam ducimus occaecati nisi</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-3.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Cargo</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-4.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Trucking</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-5.jpg" alt="" class="img-fluid">
-              </div>
-              <h3>Packaging</h3>
-              <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur maiores beatae consequatur magni voluptates</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-6.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Warehousing</a></h3>
-              <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi quisquam aut nostrum unde et qui est non quo nulla</p>
-            </div>
-          </div><!-- End Card Item -->
-
+          </div>
         </div>
-
+      
+          {% endfor %}
+        {% if services.has_next and services.has_previous %} 
+          <a href={% url 'services:services' %}?page={{first}}><button>first page</button>
+          <a href={% url 'services:services' %}?page={{services.previous_page_number}}><button>prev pag</button>
+          <a href={% url 'services:services' %}?page={{services.next_page_number}}><button>next page</button>
+          <a href={% url 'services:services' %}?page={{last}}><button>last page</button>
+        {% elif services.has_next %}
+          <a href={% url 'services:services' %}?page={{services.next_page_number}}><button>next page</button>
+          <a href={% url 'services:services' %}?page={{last}}><button>last page</button>
+        {% elif services.has_previous %}
+          <a href={% url 'services:services' %}?page={{first}}><button>first page</button>
+          <a href={% url 'services:services' %}?page={{services.previous_page_number}}><button>prev page</button>
+        {% endif %} 
       </div>
+          <!-- End Card Item -->
+
+        
+
+
+
+        
+
+      
 
     </section><!-- /Services Section -->
 
@@ -154,7 +129,7 @@
 
         <div class="row gy-4 align-items-center features-item">
           <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
-            <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
+            <img src="{% static 'assets/img/features-1.jpg' %}" class="img-fluid" alt="">
           </div>
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
@@ -172,7 +147,7 @@
 
         <div class="row gy-4 align-items-center features-item">
           <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+            <img src="{% static 'assets/img/features-2.jpg' %}" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
             <h3>Corporis temporibus maiores provident</h3>
@@ -190,7 +165,7 @@
 
         <div class="row gy-4 align-items-center features-item">
           <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out">
-            <img src="assets/img/features-3.jpg" class="img-fluid" alt="">
+            <img src="{% static 'assets/img/features-3.jpg' %}" class="img-fluid" alt="">
           </div>
           <div class="col-md-7" data-aos="fade-up">
             <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
@@ -205,7 +180,7 @@
 
         <div class="row gy-4 align-items-center features-item">
           <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out">
-            <img src="assets/img/features-4.jpg" class="img-fluid" alt="">
+            <img src="{% static 'assets/img/features-4.jpg' %}" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 order-2 order-md-1" data-aos="fade-up">
             <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
@@ -228,7 +203,7 @@
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section dark-background">
 
-      <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
+      <img src="{% static 'assets/img/testimonials-bg.jpg' %}" class="testimonials-bg" alt="">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -252,7 +227,7 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <img src="{% static 'assets/img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
                 <h3>Saul Goodman</h3>
                 <h4>Ceo &amp; Founder</h4>
                 <div class="stars">
@@ -268,7 +243,7 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <img src="{% static 'assets/img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
                 <h3>Sara Wilsson</h3>
                 <h4>Designer</h4>
                 <div class="stars">
@@ -284,7 +259,7 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <img src="{% static 'assets/img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
                 <h3>Jena Karlis</h3>
                 <h4>Store Owner</h4>
                 <div class="stars">
@@ -300,7 +275,7 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <img src="{% static 'assets/img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
                 <h3>Matt Brandon</h3>
                 <h4>Freelancer</h4>
                 <div class="stars">
@@ -316,7 +291,7 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <img src="{% static 'assets/img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
                 <h3>John Larson</h3>
                 <h4>Entrepreneur</h4>
                 <div class="stars">
