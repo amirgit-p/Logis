@@ -51,3 +51,23 @@ class Agent(models.Model):
 class Fqa(models.Model):
     questin = models.TextField()
     answer = models.TextField()
+
+class Contact(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    def __str__(self):
+        return self.name
+    
+class Quote(models.Model):
+    departure = models.CharField(max_length=200)
+    delivery = models.CharField(max_length=200)
+    weight = models.IntegerField()
+    dimensions = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
