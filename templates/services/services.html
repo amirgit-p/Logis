@@ -23,7 +23,7 @@
     <section id="featured-services" class="featured-services section">
 
       <div class="container">
-
+        
         <div class="row gy-4">
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
@@ -55,8 +55,10 @@
           </div><!-- End Service Item -->
 
         </div>
+        
 
       </div>
+      
 
     </section><!-- /Featured Services Section -->
 
@@ -69,74 +71,47 @@
         <h2>Our ServiceS</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
-
+      
       <div class="container">
-
+        {% for service in services %}
         <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div  class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="card">
-              <div class="card-img">
+              <div  class="card-img" >
                 <img src="{% static 'assets/img/service-1.jpg' %}" alt="" class="img-fluid">
               </div>
-              <h3>Storage</h3>
-              <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam repellendus temporibus itaqueofficiis odit</p>
+              <h3 class="title">
+                <a href={% url 'services:service-details' id=service.id %}>{{service.title}}</a>
+              </h3>
+              {% comment %} <h3><a href={% url 'services:service-details' id=service.id %}>{{service.title}}</h3> {% endcomment %}
+              <p>{{service.desc}}</p>
             </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="card">
-              <div class="card-img">
-                <img src="{% static 'assets/img/service-2.jpg' %}" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Logistics</a></h3>
-              <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt molestiae dolor ipsam ducimus occaecati nisi</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="card">
-              <div class="card-img">
-                <img src="{% static 'assets/img/service-3.jpg' %}" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Cargo</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="card">
-              <div class="card-img">
-                <img src="{% static 'assets/img/service-4.jpg' %}" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Trucking</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="card">
-              <div class="card-img">
-                <img src="{% static 'assets/img/service-5.jpg' %}" alt="" class="img-fluid">
-              </div>
-              <h3>Packaging</h3>
-              <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur maiores beatae consequatur magni voluptates</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="card">
-              <div class="card-img">
-                <img src="{% static 'assets/img/service-6.jpg' %}" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Warehousing</a></h3>
-              <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi quisquam aut nostrum unde et qui est non quo nulla</p>
-            </div>
-          </div><!-- End Card Item -->
-
+          </div>
         </div>
-
+      
+          {% endfor %}
+        {% if services.has_next and services.has_previous %} 
+          <a href={% url 'services:services' %}?page={{first}}><button>first page</button>
+          <a href={% url 'services:services' %}?page={{services.previous_page_number}}><button>prev pag</button>
+          <a href={% url 'services:services' %}?page={{services.next_page_number}}><button>next page</button>
+          <a href={% url 'services:services' %}?page={{last}}><button>last page</button>
+        {% elif services.has_next %}
+          <a href={% url 'services:services' %}?page={{services.next_page_number}}><button>next page</button>
+          <a href={% url 'services:services' %}?page={{last}}><button>last page</button>
+        {% elif services.has_previous %}
+          <a href={% url 'services:services' %}?page={{first}}><button>first page</button>
+          <a href={% url 'services:services' %}?page={{services.previous_page_number}}><button>prev page</button>
+        {% endif %} 
       </div>
+          <!-- End Card Item -->
+
+        
+
+
+
+        
+
+      
 
     </section><!-- /Services Section -->
 
