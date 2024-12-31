@@ -22,16 +22,30 @@ def service (request):
         services = services_paginate.get_page(first_page)
 
     context = {
-        "services" : services,
-        "features" : features,
-        "tester" : tester,
-        "fqa" : fqa,
-        "options" : options,
-        "first" : first_page,
-        "last" : last_page,
-    }
-
+            "services" : services,
+            "features" : features,
+            "tester" : tester,
+            "fqa" : fqa,
+            "options" : options,
+            "first" : first_page,
+            "last" : last_page,
+        }
+        
     return render(request , 'services/services.html',context=context)
+    
+
+
+
+    # context = {
+    #     "features" : features,
+    #     "tester" : tester,
+    #     "fqa" : fqa,
+    #     "options" : options,
+    #     "first" : first_page,
+    #     "last" : last_page,
+    # }
+
+    
 
 def service_detail (request, id):
     services = get_object_or_404(Services, id=id)
