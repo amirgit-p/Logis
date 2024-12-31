@@ -1,27 +1,32 @@
 from django.shortcuts import render
-from .models import Agent,Testimonials,Fqa,Contact,Quote
-from services.models import Services,Features
+from .models import Agent,Testimonials,Fqa,Contact,Quote , CountStars
+from services.models import Services,Features, Options
 from .forms import Contactform,Quoteform
 from django.contrib import messages
+
 def home(request):
-    services = Services.objects.filter(status = True)
+    services = Services.objects.filter(status = True)[:3] 
     features = Features.objects.filter(status = True)
     tester = Testimonials.objects.filter(status = True)
+    options = Options.objects.all()
+    stars = CountStars.objects.all()
     fqa = Fqa.objects.all()
     context = {
         'services': services,
+        'options' : options,
         'features': features,
         'tester':tester,
         'fqa': fqa,
+        'stars' : stars,
     }
     return render (request, 'root/index.html',context=context)
 
 def about(request):
-    agent = Agent.objects.filter(status = True)
+    agents = Agent.objects.filter(status = True)
     fqa = Fqa.objects.all()
     tester = Testimonials.objects.filter(status = True)
     context = {
-        'agent': agent,
+        'agents': agents,
         'tester':tester,
         'fqa': fqa,
     }
