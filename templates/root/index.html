@@ -16,8 +16,8 @@
             <h2 data-aos="fade-up">Your Lightning Fast Delivery Partner</h2>
             <p data-aos="fade-up" data-aos-delay="100">Facere distinctio molestiae nisi fugit tenetur repellat non praesentium nesciunt optio quis sit odio nemo quisquam. eius quos reiciendis eum vel eum voluptatem eum maiores eaque id optio ullam occaecati odio est possimus vel reprehenderit</p>
 
-            <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
-              <input type="text" class="form-control" placeholder="Your ZIP code or City. e.g. New York">
+            <form class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+              <input type="text" name="search" class="form-control" placeholder="Search in Services">
               <button type="submit" class="btn btn-primary">Search</button>
             </form>
 
@@ -176,7 +176,7 @@
               <div class="card-img">
                 <img src={{service.image.url}} alt="" class="img-fluid">
               </div>
-              <h3><a href="#" class="stretched-link">{{service.title}}</a></h3>
+              <h3><a href={% url 'services:service-details' id=service.id %}>{{service.title}}</a></h3>
               <p>{{service.desc}}</p>
             </div>
           </div><!-- End Card Item -->

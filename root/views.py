@@ -5,12 +5,20 @@ from .forms import Contactform,Quoteform
 from django.contrib import messages
 
 def home(request):
-    services = Services.objects.filter(status = True)[:3] 
+    # services = Services.objects.filter(status = True)
     features = Features.objects.filter(status = True)
     tester = Testimonials.objects.filter(status = True)
     options = Options.objects.all()
     stars = CountStars.objects.all()
     fqa = Fqa.objects.all()
+
+    if request.GET.get("search"):
+        search = request.GET.get("search")
+        services = Services.objects.filter(desc__contains=search, status = True)[:3] 
+        
+    else:
+        services = Services.objects.filter(status = True)[:3] 
+
     context = {
         'services': services,
         'options' : options,
