@@ -73,6 +73,14 @@
             </ul>
           </li>
           <li><a href={% url "root:contactus" %}>Contact</a></li>
+          
+          {% if request.user.is_authenticated %}
+          <li><a href="#">Logged in as {{ request.user.username }}</a></li>
+          <li><a href={% url 'accounts:change_password' %}>Change Password</a></li>
+          <li><a href={% url 'accounts:logout' %}>Logout</a></li>
+          {% else %}
+          <li><a href={% url 'accounts:login' %}>Login/SignUp</a></li>
+          {% endif %}
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
