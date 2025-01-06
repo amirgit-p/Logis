@@ -94,9 +94,8 @@ def  edit_profile(request):
              messages.add_message(request, messages.ERROR, "Invalid input data")
              return redirect("accounts:edit_profile")
     else:
-        user=request.user
         form=Editprofile(instance=user)
         context={
-            'form':form,
+            "form":form,
         }
         return render(request,"registration/edit-profile.html",context=context)
