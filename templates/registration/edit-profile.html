@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'title' %}Edit Password{% endblock 'title' %}
+{% block 'content' %}
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/page-title-bg.jpg);">
+      <div class="container position-relative">
+        <h1>Edit password</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Edit password</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Edit profile Section -->
+    <section id="about" class="about section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+          <div class="col-lg-6 content order-last  order-lg-first" data-aos="fade-up" data-aos-delay="100">
+            <h1>Edit Profile</h1>
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">Save</button>
+            </form>
+            {% for message in messages %}
+              <h2 style="color:red;">{{ message }}</h2>
+            {% endfor %}
+        
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /change password Section -->
+
+    
+
+  </main>
+  {% endblock 'content' %}
