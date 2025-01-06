@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from .models import User
 
 
 class LoginForm(forms.Form):
@@ -14,3 +15,12 @@ class SignUpForm(UserCreationForm):
 class ChangePasswordForm(forms.Form):
     password1 = forms.CharField(max_length=15)
     password2 = forms.CharField(max_length=15)
+
+
+class Editprofile(forms.ModelForm):
+    idcode=forms.CharField(max_length=10)
+    phone=forms.CharField(max_length=15)
+    image=forms.ImageField()
+    class Meta:
+        model= User
+        fields=["id_code","phone","image"]

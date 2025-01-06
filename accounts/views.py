@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm, SignUpForm, ChangePasswordForm
+from .forms import LoginForm, SignUpForm, ChangePasswordForm ,Editprofile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
@@ -81,7 +81,21 @@ def reset_password_confirm(request):
 def  reset_password_complete(request):
     pass
 
-
+@login_required
 def  edit_profile(request):
-    pass
-
+    user=request.user
+    if request.method == 'POST' :
+        form=Editprofile(request.POST,request.FILES,instance=user)
+        if form.is_valid:
+            form.save
+            messages.add_message(request,messages.SUCCESS,"Profile updated successfully")
+            return redirect("accounts:edit_profile")
+        else:
+             messages.add_message(request, messages.ERROR, "Invalid input data")
+             return redirect("accounts:edit_profile")
+    else:
+        form=Editprofile(instance=user)
+        context={
+            "form":form,
+        }
+        return render(request,"registration/edit-profile.html",context=context)
