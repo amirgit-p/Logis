@@ -78,6 +78,8 @@
           <li><a href="#">Logged in as {{ request.user.username }}</a></li>
           <li><a href={% url 'accounts:change_password' %}>Change Password</a></li>
           <li><a href={% url 'accounts:logout' %}>Logout</a></li>
+          <li><a href={% url 'accounts:edit_profile' %}>profile</a></li>
+          <li><img src={{request.user.image.url}} length="50" width="50"></li>
           {% else %}
           <li><a href={% url 'accounts:login' %}>Login/SignUp</a></li>
           {% endif %}
