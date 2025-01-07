@@ -30,7 +30,7 @@
                 {% csrf_token %}
                 {{form.as_p}}
                 <button type="submit">Save</button>
-            </form>
+              </form>
             {% for message in messages %}
               <h2 style="color:red;">{{ message }}</h2>
             {% endfor %}
