@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User,Agent,CountStars,Job,Fqa,Testimonials,Contact,Quote
+from .models import Agent,CountStars,Job,Fqa,Testimonials,Contact,Quote
 
 
 
