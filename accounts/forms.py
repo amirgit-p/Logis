@@ -9,7 +9,10 @@ class LoginForm(forms.Form):
 
 
 class SignUpForm(UserCreationForm):
-    email = forms.EmailField()
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ["username", "password1", "password2" , "id_code","phone","email"]
 
 
 class ChangePasswordForm(forms.Form):
@@ -17,10 +20,7 @@ class ChangePasswordForm(forms.Form):
     password2 = forms.CharField(max_length=15)
 
 
-class Editprofile(forms.ModelForm):
-    idcode=forms.CharField(max_length=10)
-    phone=forms.CharField(max_length=15)
-    image=forms.ImageField()
+class EditProfile(forms.ModelForm):
     class Meta:
-        model= User
-        fields=["id_code","phone","image"]
+        model = User
+        fields = ["id_code", "phone", "image"]
