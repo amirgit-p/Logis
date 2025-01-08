@@ -10,7 +10,7 @@ urlpatterns = [
     path("change-password/", change_password, name="change_password"),
     path("reset-password/", reset_password, name="reset_password"),
     path("reset-password-done/", reset_password_done, name="reset_password_done"),
-    path("reset-passsword-confirm/", reset_password_confirm, name="reset_password_confirm"),
+    path("reset-password-confirm/<str:token>", reset_password_confirm, name="reset_password_confirm"),
     path("reset-password-complete/", reset_password_complete, name="reset_password_complete"),
     path("edit-profile/", edit_profile, name="edit_profile"),
 
