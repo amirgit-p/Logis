@@ -24,3 +24,11 @@ class EditProfile(forms.ModelForm):
     class Meta:
         model = User
         fields = ["id_code", "phone", "image"]
+
+
+class ResetPassForm(forms.Form):
+    email = forms.EmailField()
+
+class ConfirmPassForm(forms.Form):
+    pass1 = forms.CharField(max_length=15)
+    pass2 = forms.CharField(max_length=15)
