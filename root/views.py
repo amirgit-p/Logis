@@ -12,12 +12,11 @@ def home(request):
     stars = CountStars.objects.all()
     fqa = Fqa.objects.all()
 
-    if request.GET.get("search"):
-        search = request.GET.get("search")
-        services = Services.objects.filter(desc__contains=search, status = True)[:3] 
-        
+    if request.GET.get('search'):
+        search=request.GET.get('search')
+        services = Services.objects.filter(desc__contains=search, status = True)[:3]
     else:
-        services = Services.objects.filter(status = True)[:3] 
+        services = Services.objects.filter(status = True)[:3]
 
     context = {
         'services': services,

@@ -3,12 +3,20 @@ from .models import Services,Features , Options
 from root.models import Testimonials,Fqa
 from django.core.paginator import Paginator
 
-def service (request):
-    services = Services.objects.filter(status = True)
+def service (request , **kwargs):
     features = Features.objects.filter(status = True)
     tester = Testimonials.objects.filter(status = True)
     options = Options.objects.all()
     fqa = Fqa.objects.all()
+
+    if kwargs.get("category"):
+        services = Services.objects.filter(category__title=kwargs.get("category"), status=True)
+    else:
+        services = Services.objects.filter(status=True)
+        
+
+        
+
 
     services_paginate = Paginator(services, 3)
     first_page = 1
@@ -50,10 +58,13 @@ def service (request):
 def service_detail (request, id):
     services = get_object_or_404(Services, id=id)
     options = Options.objects.all()
+    category = Services.category
 
     context  = {
     "services" : services,
     "options" : options,
+    "category": category,
+
     }
 
     return render(request , 'services/service-details.html',context=context)
