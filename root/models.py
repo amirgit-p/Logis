@@ -1,10 +1,5 @@
 from django.db import models
-
 from accounts.models import User
-
-
-
-
 
 class Job(models.Model):
     name = models.CharField(max_length=120)
@@ -12,13 +7,10 @@ class Job(models.Model):
     def __str__(self):
         return self.name
 
-
 class CountStars(models.Model):
     count = models.IntegerField(default=5)
     def __str__(self):
         return str(self.count)
-
-    
 
 class Testimonials(models.Model):
     name = models.CharField(max_length=120)
@@ -32,7 +24,6 @@ class Testimonials(models.Model):
     
     def stars_count(self):
         return range(self.stars.count)
-
 
 class Agent(models.Model):
     name = models.ForeignKey(User,on_delete=models.CASCADE)

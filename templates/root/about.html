@@ -27,11 +27,7 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 position-relative align-self-start order-lg-last order-first" data-aos="fade-up" data-aos-delay="200">
-            <div id="89436644663">
-              <script type="text/JavaScript" 
-              src="https://www.aparat.com/embed/e458f21?data[rnddiv]=89436644663&data[responsive]=yes&autoplay=true">
-              </script>
-            </div>
+            <div id="56124527864"><script type="text/JavaScript" src="https://www.aparat.com/embed/sda3q4b?data[rnddiv]=56124527864&data[responsive]=yes&autoplay=true"></script></div>
           </div>
 
           <div class="col-lg-6 content order-last  order-lg-first" data-aos="fade-up" data-aos-delay="100">
@@ -77,31 +73,37 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-3 col-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Clients</p>
+                <span 
+                    class="purecounter" 
+                    data-purecounter-start="0" 
+                    data-purecounter-end="{{ user_count }}" 
+                    data-purecounter-duration="1">
+                </span>
+                <p>Clients</p>
+            </div>
+        </div><!-- End Stats Item -->
+        
+
+          <div class="col-lg-3 col-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="{{service_count}}" data-purecounter-duration="0" class="purecounter">service_count</span>
+              <p>Services</p>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-3 col-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
+              <span data-purecounter-start="0" data-purecounter-end="{{ vips }}" data-purecounter-duration="0" class="purecounter">{{vips}}</span>
+              <p>VIPs</p>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-3 col-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hours Of Support</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Workers</p>
+              <span data-purecounter-start="0" data-purecounter-end="{{ count_agent }}" data-purecounter-duration="1" class="purecounter">{{ count_agent}}</span>
+              <p>Agent</p>
             </div>
           </div><!-- End Stats Item -->
 
