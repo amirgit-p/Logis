@@ -14,10 +14,6 @@ def service (request , **kwargs):
     else:
         services = Services.objects.filter(status=True)
         
-
-        
-
-
     services_paginate = Paginator(services, 3)
     first_page = 1
     last_page = services_paginate.num_pages
@@ -41,20 +37,6 @@ def service (request , **kwargs):
         
     return render(request , 'services/services.html',context=context)
     
-
-
-
-    # context = {
-    #     "features" : features,
-    #     "tester" : tester,
-    #     "fqa" : fqa,
-    #     "options" : options,
-    #     "first" : first_page,
-    #     "last" : last_page,
-    # }
-
-    
-
 def service_detail (request, id):
     services = get_object_or_404(Services, id=id)
     options = Options.objects.all()
