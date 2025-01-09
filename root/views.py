@@ -3,14 +3,19 @@ from .models import Agent,Testimonials,Fqa,Contact,Quote , CountStars
 from services.models import Services,Features, Options
 from .forms import Contactform,Quoteform
 from django.contrib import messages
+from accounts.models import User
 
 def home(request):
-    services = Services.objects.filter(status = True)[:3] 
     features = Features.objects.filter(status = True)
     tester = Testimonials.objects.filter(status = True)
     options = Options.objects.all()
     stars = CountStars.objects.all()
     fqa = Fqa.objects.all()
+    user_count = User.objects.count() 
+    vips = Testimonials.objects.count()
+    service_count = Services.objects.count()
+    count_agent = Agent.objects.count()
+
     if request.GET.get('search'):
         search=request.GET.get('search')
         services = Services.objects.filter(desc__contains=search, status = True)[:3]
@@ -24,6 +29,11 @@ def home(request):
         'tester':tester,
         'fqa': fqa,
         'stars' : stars,
+        'user_count' : user_count,
+        'vips': vips ,
+        'service_count' : service_count,
+        'count_agent' : count_agent,
+
     }
     return render (request, 'root/index.html',context=context)
 
@@ -31,10 +41,19 @@ def about(request):
     agents = Agent.objects.filter(status = True)
     fqa = Fqa.objects.all()
     tester = Testimonials.objects.filter(status = True)
+    user_count = User.objects.count() 
+    vips = Testimonials.objects.count()
+    service_count = Services.objects.count()
+    count_agent = Agent.objects.count()
+
     context = {
         'agents': agents,
         'tester':tester,
         'fqa': fqa,
+        'user_count' : user_count,
+        'vips': vips ,
+        'service_count' : service_count,
+        'count_agent' : count_agent,
     }
     return render (request, 'root/about.html',context=context) 
 
